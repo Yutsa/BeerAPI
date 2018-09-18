@@ -1,6 +1,6 @@
 spring:
  datasource:
-   url: jdbc:mysql://metzopole.xyz
+   url: jdbc:mysql://metzopole.xyz/beerapi
    username: BeerAPI
    password: monkey
    driver-class-name: com.mysql.jdbc.Driver
