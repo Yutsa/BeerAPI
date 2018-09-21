@@ -8,17 +8,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.MessageFormat;
-import java.util.Collections;
-import java.util.Map;
 import java.util.Optional;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
+@RequestMapping("/beers")
 public class BeerController
 {
-  BeerRepository beerRepository;
+  private BeerRepository beerRepository;
   private static final Logger logger = LoggerFactory.getLogger(BeerController.class);
 
   public BeerController(BeerRepository beerRepository)
@@ -26,18 +30,17 @@ public class BeerController
     this.beerRepository = beerRepository;
   }
 
-  @GetMapping("/version")
-  public Map<String, String> getVersion() {
-    return Collections.singletonMap("version", "0.0.1-SNAPSHOT");
-  }
-
-  @GetMapping("/beers")
+  @ApiOperation(value = "Retrieve all the beers", nickname = "getAllBeers", notes = "", tags={ "Beers", })
+  @ApiResponses(value = {
+      @ApiResponse(code = 200, message = "Success"),
+      @ApiResponse(code = 404, message = "Beer with id {id} not found") })
+  @GetMapping("/")
   public Iterable<Beer> getAllBeers()
   {
     return beerRepository.findAll();
   }
 
-  @GetMapping("/beers/{id}")
+  @GetMapping("/{id}")
   public Beer getById(@PathVariable Long id) {
     logger.info("Getting beer from id {}", id);
     Optional<Beer> beer = beerRepository.findById(id);

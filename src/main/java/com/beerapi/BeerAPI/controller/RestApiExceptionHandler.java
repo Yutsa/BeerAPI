@@ -15,7 +15,7 @@ import java.util.Date;
 
 @ControllerAdvice
 @RestController
-public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler
+public class RestApiExceptionHandler extends ResponseEntityExceptionHandler
 {
 
   @ExceptionHandler(Exception.class)
