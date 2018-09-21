@@ -1,0 +1,99 @@
+swagger: "2.0"
+info:
+  description: "This is a Beer API"
+  version: "0.0.1"
+  title: "Bitte ein Bit API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "bitteeinbit@beer.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "beerapi.com"
+basePath: "/"
+tags:
+- name: "beer"
+  description: "Everything about your Beers"
+  externalDocs:
+    description: "Find out more"
+    url: "http://notre-documentation-de-biere.io"
+schemes:
+- "https"
+- "http"
+paths:
+  /beers/{id}:
+    parameters:
+     - name: "id"
+       in: "path"
+       description: "Beer's ID"
+       required: true
+       type: "integer"
+       format: "int64"
+    get:
+      tags: 
+      - "beer"
+      summary: "Find a beer by its ID"
+      description: "Returns beer corresponding to this ID"
+      operationId: "getBeerById"
+      responses:
+        '200':
+          description: "Beer successfully gotten"
+          schema:
+            $ref: "#/definitions/Beer"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Beer not found"
+      # security:
+      # - api_key: [] 
+    put:
+      tags:
+      - "beer"
+      summary: "Updates an existing beer"
+      operationId: "updateBeer"
+      responses:
+        200:
+          description: 'Beer successfully updated'
+          schema:
+            $ref: "#/definitions/Beer"
+        405:
+          description: "Invalid input"
+    delete:
+      tags:
+      - "beer"
+      summary: "Deletes a beer"
+      operationId: "deleteBeer"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Pet not found"
+    post:
+      tags:
+      - "beer"
+      summary: "Add a new beer in database"
+      operationId: "addBeer"
+      responses:
+        200:
+          description: "Beer successfully updated"
+          schema:
+            $ref: "#/definitions/Beer"
+        405:
+          description: "Invalid input"
+
+definitions:
+  Beer:
+    type: "object"
+    required:
+    - "name"
+    - "alcoholPercentage"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        example: "BitBurger"
+      alcoholPercentage:
+        type: "integer"
+        format: "int64"
