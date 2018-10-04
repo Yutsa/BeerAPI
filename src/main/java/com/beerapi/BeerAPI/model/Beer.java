@@ -1,8 +1,11 @@
 package com.beerapi.BeerAPI.model;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,13 +14,24 @@ import javax.persistence.Table;
 public class Beer
 {
   @Id
-  @GeneratedValue
-  private long id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   private String name;
 
   @Column(name = "abv")
   private double alcoholPercentage;
+
+  public Beer(double alcoholPercentage, String name)
+  {
+    this.name = name;
+    this.alcoholPercentage = alcoholPercentage;
+  }
+
+
+  public Beer()
+  {
+  }
 
   public String getName()
   {
@@ -39,9 +53,14 @@ public class Beer
     this.alcoholPercentage = alcoholPercentage;
   }
 
-  public long getId()
+  public Long getId()
   {
     return id;
+  }
+
+  public void setId(Long id)
+  {
+    this.id = id;
   }
 
   @Override
@@ -54,5 +73,20 @@ public class Beer
         '}';
   }
 
+  @Override
+  public boolean equals(Object o)
+  {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Beer beer = (Beer) o;
+    return Double.compare(beer.alcoholPercentage, alcoholPercentage) == 0 &&
+        Objects.equals(id, beer.id) &&
+        Objects.equals(name, beer.name);
+  }
 
+  @Override
+  public int hashCode()
+  {
+    return Objects.hash(id, name, alcoholPercentage);
+  }
 }
