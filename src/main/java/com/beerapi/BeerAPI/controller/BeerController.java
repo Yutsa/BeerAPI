@@ -17,13 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.MessageFormat;
 import java.util.Optional;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-
 @RestController
 @RequestMapping("/beers")
-public class BeerController
+public class BeerController implements BeerAPI
 {
   private BeerRepository beerRepository;
   private static final Logger logger = LoggerFactory.getLogger(BeerController.class);
@@ -33,16 +29,14 @@ public class BeerController
     this.beerRepository = beerRepository;
   }
 
-  @ApiOperation(value = "Retrieve all the beers", nickname = "getAllBeers", notes = "", tags={ "Beers", })
-  @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Success"),
-      @ApiResponse(code = 404, message = "Beer with id {id} not found") })
+  @Override
   @GetMapping("/")
   public Iterable<Beer> getAllBeers()
   {
     return beerRepository.findAll();
   }
 
+  @Override
   @GetMapping("/{id}")
   public Beer getById(@PathVariable Long id) {
     logger.info("Getting beer from id {}", id);
@@ -58,12 +52,14 @@ public class BeerController
     return beer.get();
   }
 
+  @Override
   @DeleteMapping("/{id}")
   public void deleteById(@PathVariable Long id) {
     logger.info("Deleting beer with id {}", id);
     beerRepository.deleteById(id);
   }
 
+  @Override
   @PostMapping("/beers")
   public Beer addBeer(@RequestBody Beer newBeer) {
     return beerRepository.save(newBeer);
