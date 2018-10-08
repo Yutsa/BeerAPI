@@ -64,4 +64,23 @@ public class BeerController implements BeerAPI
   public Beer addBeer(@RequestBody Beer newBeer) {
     return beerRepository.save(newBeer);
   }
+
+  @Override
+  @GetMapping("/beers/similar/{id}")
+  public Iterable<Beer> getSimilarBeers(@PathVariable Long id)
+  {
+    logger.info("Getting beers similar to the beer with id {}", id);
+    Optional<Beer> initialBeer = beerRepository.findById(id);
+
+    if (!initialBeer.isPresent())
+    {
+      String message = MessageFormat.format("Beer with id {0} not found", id);
+      throw new BeerNotFoundException(message);
+    }
+
+    return beerRepository.findBeerByAlcoholPercentage(initialBeer.
+        get()
+        .getAlcoholPercentage());
+
+  }
 }
