@@ -1,6 +1,6 @@
-package com.beerapi.BeerAPI.controller;
+package com.beerapi.beerapi.controller;
 
-import com.beerapi.BeerAPI.model.Beer;
+import com.beerapi.beerapi.model.dto.BeerDTO;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -11,13 +11,13 @@ public interface BeerAPI
   @ApiOperation(value = "Retrieve all the beers", nickname = "Retrieve all the beers", tags={ "Beers" })
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success") })
-  Iterable<Beer> getAllBeers();
+  Iterable<BeerDTO> getAllBeers();
 
   @ApiOperation(value = "Retrieve a beer by its ID", nickname = "Retrieve a beer by ID", tags={ "Beers" })
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success"),
       @ApiResponse(code = 404, message = "Beer with id {id} not found") })
-  Beer getById(Long id);
+  BeerDTO getById(Long id);
 
   @ApiOperation(value = "Deletes a beer by its ID", nickname = "Delete a beer by ID", tags={ "Beers" })
   @ApiResponses(value = {
@@ -29,10 +29,10 @@ public interface BeerAPI
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success"),
       @ApiResponse(code = 404, message = "Beer with id {id} not found") })
-  Beer addBeer(Beer newBeer);
+  BeerDTO addBeer(BeerDTO newBeer);
 
   @ApiOperation(value = "Retrieve the beers that are like the one passed as parameter", nickname = "Similar Beers", tags={ "Beers"})
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success")})
-  Iterable<Beer> getSimilarBeers(Long id);
+  Iterable<BeerDTO> getSimilarBeers(Long id);
 }

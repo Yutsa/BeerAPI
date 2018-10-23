@@ -1,8 +1,9 @@
-package com.beerapi.BeerAPI.controller;
+package com.beerapi.beerapi.controller;
 
-import com.beerapi.BeerAPI.exception.BeerNotFoundException;
-import com.beerapi.BeerAPI.model.Beer;
-import com.beerapi.BeerAPI.repository.BeerRepository;
+import com.beerapi.beerapi.exception.BeerNotFoundException;
+import com.beerapi.beerapi.model.dto.BeerDTO;
+import com.beerapi.beerapi.model.entities.Beer;
+import com.beerapi.beerapi.repository.BeerRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.MessageFormat;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/beers")
@@ -31,25 +34,28 @@ public class BeerController implements BeerAPI
 
   @Override
   @GetMapping("/")
-  public Iterable<Beer> getAllBeers()
+  public Iterable<BeerDTO> getAllBeers()
   {
-    return beerRepository.findAll();
+    logger.info("Getting all the beers.");
+    return StreamSupport.stream(beerRepository.findAll().spliterator(), false)
+        .map(BeerDTO::new)
+        .collect(Collectors.toList());
   }
 
   @Override
   @GetMapping("/{id}")
-  public Beer getById(@PathVariable Long id) {
+  public BeerDTO getById(@PathVariable Long id) {
     logger.info("Getting beer from id {}", id);
     Optional<Beer> beer = beerRepository.findById(id);
 
     if (!beer.isPresent())
     {
       String message = MessageFormat.format("Beer with id {0} not found", id);
+      logger.warn(message);
       throw new BeerNotFoundException(message);
     }
 
-
-    return beer.get();
+    return new BeerDTO(beer.get());
   }
 
   @Override
@@ -61,13 +67,15 @@ public class BeerController implements BeerAPI
 
   @Override
   @PostMapping("/beers")
-  public Beer addBeer(@RequestBody Beer newBeer) {
-    return beerRepository.save(newBeer);
+  public BeerDTO addBeer(@RequestBody BeerDTO newBeer) {
+    logger.info("Adding beer {}", newBeer);
+    Beer beer = new Beer(newBeer);
+    return new BeerDTO(beerRepository.save(beer));
   }
 
   @Override
   @GetMapping("/beers/similar/{id}")
-  public Iterable<Beer> getSimilarBeers(@PathVariable Long id)
+  public Iterable<BeerDTO> getSimilarBeers(@PathVariable Long id)
   {
     logger.info("Getting beers similar to the beer with id {}", id);
     Optional<Beer> initialBeer = beerRepository.findById(id);
@@ -75,12 +83,15 @@ public class BeerController implements BeerAPI
     if (!initialBeer.isPresent())
     {
       String message = MessageFormat.format("Beer with id {0} not found", id);
+      logger.warn(message);
       throw new BeerNotFoundException(message);
     }
 
-    return beerRepository.findBeerByAlcoholPercentage(initialBeer.
-        get()
-        .getAlcoholPercentage());
+    return StreamSupport.stream(beerRepository.
+        findBeerByAlcoholPercentage(initialBeer.get().getAlcoholPercentage()).spliterator(),
+        false)
+        .map(BeerDTO::new)
+        .collect(Collectors.toList());
 
   }
 }

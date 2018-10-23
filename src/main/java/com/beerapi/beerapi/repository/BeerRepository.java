@@ -1,6 +1,6 @@
-package com.beerapi.BeerAPI.repository;
+package com.beerapi.beerapi.repository;
 
-import com.beerapi.BeerAPI.model.Beer;
+import com.beerapi.beerapi.model.entities.Beer;
 
 import org.springframework.data.repository.CrudRepository;
 

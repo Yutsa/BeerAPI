@@ -1,4 +1,4 @@
-package com.beerapi.BeerAPI.exception;
+package com.beerapi.beerapi.exception;
 
 import java.util.Date;
 

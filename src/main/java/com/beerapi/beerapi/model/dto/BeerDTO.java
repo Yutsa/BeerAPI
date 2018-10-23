@@ -1,37 +1,30 @@
-package com.beerapi.BeerAPI.model;
+package com.beerapi.beerapi.model.dto;
+
+import com.beerapi.beerapi.model.entities.Beer;
 
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "beers")
-public class Beer
+public class BeerDTO
 {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
   private String name;
-
-  @Column(name = "abv")
   private double alcoholPercentage;
 
-  public Beer(double alcoholPercentage, String name)
+  public BeerDTO(double alcoholPercentage, String name)
   {
     this.name = name;
     this.alcoholPercentage = alcoholPercentage;
   }
 
-
-  public Beer()
+  public BeerDTO(Beer beer)
   {
+    this.name = beer.getName();
+    this.alcoholPercentage = beer.getAlcoholPercentage();
+    this.id = beer.getId();
   }
+
+  public BeerDTO() {}
 
   public String getName()
   {
@@ -66,7 +59,7 @@ public class Beer
   @Override
   public String toString()
   {
-    return "Beer{" +
+    return "BeerDTO{" +
         "id=" + id +
         ", name='" + name + '\'' +
         ", alcoholPercentage=" + alcoholPercentage +
@@ -78,10 +71,10 @@ public class Beer
   {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Beer beer = (Beer) o;
-    return Double.compare(beer.alcoholPercentage, alcoholPercentage) == 0 &&
-        Objects.equals(id, beer.id) &&
-        Objects.equals(name, beer.name);
+    BeerDTO beerDTO = (BeerDTO) o;
+    return Double.compare(beerDTO.alcoholPercentage, alcoholPercentage) == 0 &&
+        Objects.equals(id, beerDTO.id) &&
+        Objects.equals(name, beerDTO.name);
   }
 
   @Override

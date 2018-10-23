@@ -1,4 +1,4 @@
-package com.beerapi.BeerAPI;
+package com.beerapi.beerapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

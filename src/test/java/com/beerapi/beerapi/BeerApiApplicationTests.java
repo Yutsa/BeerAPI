@@ -1,4 +1,4 @@
-package com.beerapi.BeerAPI;
+package com.beerapi.beerapi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

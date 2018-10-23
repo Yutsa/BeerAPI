@@ -1,4 +1,4 @@
-package com.beerapi.BeerAPI.configuration;
+package com.beerapi.beerapi.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ public class SwaggerConfiguration
   public Docket api() {
     return new Docket(DocumentationType.SWAGGER_2)
         .select()
-        .apis(RequestHandlerSelectors.basePackage("com.beerapi.BeerAPI.controller"))
+        .apis(RequestHandlerSelectors.basePackage("com.beerapi.beerapi.controller"))
         .paths(PathSelectors.any())
         .build();
   }

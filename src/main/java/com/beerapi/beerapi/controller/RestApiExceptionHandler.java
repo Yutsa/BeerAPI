@@ -1,7 +1,7 @@
-package com.beerapi.BeerAPI.controller;
+package com.beerapi.beerapi.controller;
 
-import com.beerapi.BeerAPI.exception.BeerNotFoundException;
-import com.beerapi.BeerAPI.exception.ExceptionResponse;
+import com.beerapi.beerapi.exception.BeerNotFoundException;
+import com.beerapi.beerapi.exception.ExceptionResponse;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
