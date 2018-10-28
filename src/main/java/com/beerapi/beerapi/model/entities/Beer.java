@@ -1,6 +1,6 @@
 package com.beerapi.beerapi.model.entities;
 
-import com.beerapi.beerapi.model.dto.BeerDTO;
+import com.beerapi.beerapi.model.resources.BeerResource;
 
 import java.util.Objects;
 
@@ -35,7 +35,7 @@ public class Beer
     this.alcoholPercentage = alcoholPercentage;
   }
 
-  public Beer(BeerDTO beer)
+  public Beer(BeerResource beer)
   {
     this.name = beer.getName();
     this.alcoholPercentage = beer.getAlcoholPercentage();

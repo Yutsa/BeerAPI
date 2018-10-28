@@ -1,6 +1,8 @@
 package com.beerapi.beerapi.controller;
 
-import com.beerapi.beerapi.model.dto.BeerDTO;
+import com.beerapi.beerapi.model.resources.BeerResource;
+
+import org.springframework.hateoas.Resources;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -11,13 +13,13 @@ public interface BeerAPI
   @ApiOperation(value = "Retrieve all the beers", nickname = "Retrieve all the beers", tags={ "Beers" })
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success") })
-  Iterable<BeerDTO> getAllBeers();
+  Resources<BeerResource> getAllBeers();
 
   @ApiOperation(value = "Retrieve a beer by its ID", nickname = "Retrieve a beer by ID", tags={ "Beers" })
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success"),
       @ApiResponse(code = 404, message = "Beer with id {id} not found") })
-  BeerDTO getById(Long id);
+  BeerResource getById(Long id);
 
   @ApiOperation(value = "Deletes a beer by its ID", nickname = "Delete a beer by ID", tags={ "Beers" })
   @ApiResponses(value = {
@@ -29,10 +31,10 @@ public interface BeerAPI
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success"),
       @ApiResponse(code = 404, message = "Beer with id {id} not found") })
-  BeerDTO addBeer(BeerDTO newBeer);
+  BeerResource addBeer(BeerResource newBeer);
 
   @ApiOperation(value = "Retrieve the beers that are like the one passed as parameter", nickname = "Similar Beers", tags={ "Beers"})
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success")})
-  Iterable<BeerDTO> getSimilarBeers(Long id);
+  Iterable<BeerResource> getSimilarBeers(Long id);
 }
