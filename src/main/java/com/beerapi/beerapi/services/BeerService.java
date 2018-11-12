@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class BeerService
@@ -35,8 +37,12 @@ public class BeerService
       throw new BeerNotFoundException(message);
     }
 
-    return beerRepository.
-        findBeerByAlcoholPercentage(initialBeer.get().getAlcoholPercentage());
+    double alcoholPercentage = initialBeer.get().getAlcoholPercentage();
+    Iterable<Beer> beerIterable = beerRepository.findBeerByAlcoholPercentage(alcoholPercentage);
+    return StreamSupport.stream(beerIterable.spliterator(), false)
+        .filter(b -> !b.getId().equals(id))
+        .collect(Collectors.toList());
+
   }
 
   public Beer addBeer(BeerResource newBeer) {
