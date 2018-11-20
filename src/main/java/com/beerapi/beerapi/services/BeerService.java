@@ -72,5 +72,11 @@ public class BeerService
     logger.info("Getting all the beers.");
     return beerRepository.findAll();
   }
+
+  public Iterable<Beer> searchBeer(String query) {
+    logger.info("Searching beers with query : {}", query);
+    query = query.replace("œ", "oe");
+    return beerRepository.findBeerByName(query);
+  }
 }
 

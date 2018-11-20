@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @RestController
@@ -62,14 +64,14 @@ public class BeerController implements BeerAPI
   }
 
   @Override
-  @PostMapping("/beers")
+  @PostMapping("/")
   public BeerResource addBeer(@RequestBody BeerResource newBeer) {
     logger.info("Adding beer {}", newBeer);
     return assembler.toResource(beerService.addBeer(newBeer));
   }
 
   @Override
-  @GetMapping("/beers/similar/{id}")
+  @GetMapping("/similar/{id}")
   public Resources<BeerResource> getSimilarBeers(@PathVariable Long id)
   {
     Iterable<Beer> similarBeers = beerService.getSimilarBeer(id);
@@ -77,5 +79,12 @@ public class BeerController implements BeerAPI
 
     Link link = linkTo(BeerController.class).withSelfRel();
     return new Resources<>(beers, link);
+  }
+
+  @Override
+  @GetMapping("/search/{query}")
+  public Iterable<BeerResource> searchBeer(@PathVariable String query)
+  {
+    throw new NotImplementedException();
   }
 }

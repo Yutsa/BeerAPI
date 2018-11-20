@@ -37,4 +37,8 @@ public interface BeerAPI
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success")})
   Iterable<BeerResource> getSimilarBeers(Long id);
+
+  @ApiOperation(value = "Search for a beer with a part of the name, the alcohol percentage or " +
+      "the brewery", nickname = "Search Beer")
+  Iterable<BeerResource> searchBeer(String query);
 }
