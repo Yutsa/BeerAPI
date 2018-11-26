@@ -1,21 +1,21 @@
 package com.beerapi.beerapi;
 
-import com.beerapi.beerapi.repository.BeerRepository;
+import com.beerapi.beerapi.services.BeerService;
 
+import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.mockito.Mockito.mock;
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class BeerServiceTest
 {
+  private BeerService beerService;
+
+  public BeerServiceTest()
+  {
+    beerService = new BeerService(null);
+  }
 
   @Test
-  public void getSimilarBeerTest() {
-    BeerRepository mockRepository = mock(BeerRepository.class);
+  public void prepareSearchQuery_ShouldReplaceOe() {
+    Assert.assertEquals("oeuf", beerService.prepareSearchQuery("œuf"));
   }
 }

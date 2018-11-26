@@ -75,8 +75,12 @@ public class BeerService
 
   public Iterable<Beer> searchBeer(String query) {
     logger.info("Searching beers with query : {}", query);
-    query = query.replace("œ", "oe");
+    query = prepareSearchQuery(query);
     return beerRepository.findBeerByName(query);
+  }
+
+  public String prepareSearchQuery(String query) {
+    return query.replace("œ", "oe");
   }
 }
 
