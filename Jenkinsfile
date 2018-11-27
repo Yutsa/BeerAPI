@@ -8,7 +8,7 @@ properties([buildDiscarder(logRotator( artifactNumToKeepStr: '5', numToKeepStr: 
 node {
 
 	// On définit le nom de l'image docker qui sera buildée.
-	def imageName = "BeerApi"
+	def imageName = "beerapi"
 
 	stage('checkout'){
 		checkout scm
