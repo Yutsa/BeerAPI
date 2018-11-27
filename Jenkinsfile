@@ -59,7 +59,7 @@ node {
 		// l'image sera buildée dans target/docker
 
 		// récupération des fichiers nécessaire pour faire l'image
-        sh "git clone https://github.com/Yutsa/BeerAPI.git target/docker"
+        sh "git clone https://github.com/pdelaby/docker-for-spring-boot.git target/docker"
 
 		// copie du jar de l'application
         sh "cp target/*.jar target/docker/"
