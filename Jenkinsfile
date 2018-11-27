@@ -40,6 +40,12 @@ node {
             }
         }
 
+        stage('Quality Analysis') {
+           withSonarQubeEnv('sonar') {
+              sh './mvnw sonar:sonar'
+           }
+        }
+
         stage('packaging') {
             sh "./mvnw verify -Pprod -DskipTests"
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
