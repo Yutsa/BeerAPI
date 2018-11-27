@@ -73,7 +73,7 @@ public class BeerService
   }
 
   public Iterable<Beer> searchBeer(String query) {
-    logger.info("Searching beers with query : {}", query);
+    logger.info("Searching beers with query : {}.", query);
     query = prepareSearchQuery(query);
     return beerRepository.findBeerByName(query);
   }

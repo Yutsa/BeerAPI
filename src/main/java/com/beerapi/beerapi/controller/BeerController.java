@@ -50,21 +50,21 @@ public class BeerController implements BeerAPI
   @Override
   @GetMapping("/{id}")
   public BeerResource getById(@PathVariable Long id) {
-    logger.info("Getting beer from id {}", id);
+    logger.info("Getting beer from id {}.", id);
     return assembler.toResource(beerService.getById(id));
   }
 
   @Override
   @DeleteMapping("/{id}")
   public void deleteById(@PathVariable Long id) {
-    logger.info("Deleting beer with id {}", id);
+    logger.info("Deleting beer with id {}.", id);
     beerService.deleteById(id);
   }
 
   @Override
   @PostMapping("/")
   public BeerResource addBeer(@RequestBody BeerResource newBeer) {
-    logger.info("Adding beer {}", newBeer);
+    logger.info("Adding beer {}.", newBeer);
     return assembler.toResource(beerService.addBeer(newBeer));
   }
 

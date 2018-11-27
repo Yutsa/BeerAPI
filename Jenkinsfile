@@ -73,9 +73,6 @@ node {
         }
     }
 
-
-
-
     stage('stop et rm docker') {
         // Word Count : on compte les lignes présentes du docker PS
         def imageWC = sh(script: "docker ps -a -q --filter \"name=${imageName}\" | wc -l", returnStdout: true).trim()
