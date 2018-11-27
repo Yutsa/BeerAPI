@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @RestController
@@ -85,6 +83,6 @@ public class BeerController implements BeerAPI
   @GetMapping("/search/{query}")
   public Iterable<BeerResource> searchBeer(@PathVariable String query)
   {
-    throw new NotImplementedException();
+    return assembler.toResources(beerService.searchBeer(query));
   }
 }

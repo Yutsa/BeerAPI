@@ -1,6 +1,5 @@
 package com.beerapi.beerapi.services;
 
-import com.beerapi.beerapi.controller.BeerController;
 import com.beerapi.beerapi.exception.BeerNotFoundException;
 import com.beerapi.beerapi.model.entities.Beer;
 import com.beerapi.beerapi.model.resources.BeerResource;
@@ -20,7 +19,7 @@ public class BeerService
 {
 
   private BeerRepository beerRepository;
-  private static final Logger logger = LoggerFactory.getLogger(BeerController.class);
+  private static final Logger logger = LoggerFactory.getLogger(BeerService.class);
 
   public BeerService(BeerRepository beerRepository)
   {
