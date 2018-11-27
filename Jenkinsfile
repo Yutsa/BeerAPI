@@ -85,6 +85,6 @@ node {
 	stage('start docker'){
 		// démarrage de l'image et configuration pour qu'elle se connecte à spring boot admin
 		// qui est dans le réseau springadmin
-		sh "docker run -d --name ${imageName} --net=springadmin -e -p 9999:8080 fac/${imageName}:latest"
+		sh "docker run -d --name ${imageName} --net=springadmin -p 9999:8080 fac/${imageName}:latest"
 	}
 }
