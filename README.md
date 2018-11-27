@@ -16,7 +16,7 @@ This project is a simple RESTful API about beers made with Spring Boot.
 
 ## Guide contribution
 
-Git flow
+Git flow, une branche par feature.
 
 ## Process
 
