@@ -53,6 +53,19 @@ node {
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
         }
 
+        stage('build docker') {
+                // l'image sera buildée dans target/docker
+
+                // récupération des fichiers nécessaire pour faire l'image
+                sh "git clone https://github.com/pdelaby/docker-for-spring-boot.git target/docker"
+
+                // copie du jar de l'application
+                sh "cp target/*.jar target/docker/"
+
+                // build
+                docker.build("fac/${imageName}:latest", 'target/docker')
+            }
+
 
 
         stage('cleanup') {
@@ -60,18 +73,7 @@ node {
         }
     }
 
-    stage('build docker') {
-        // l'image sera buildée dans target/docker
 
-        // récupération des fichiers nécessaire pour faire l'image
-        sh "git clone https://github.com/pdelaby/docker-for-spring-boot.git target/docker"
-
-        // copie du jar de l'application
-        sh "cp target/*.jar target/docker/"
-
-        // build
-        docker.build("fac/${imageName}:latest", 'target/docker')
-    }
 
 
     stage('stop et rm docker') {
