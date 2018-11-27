@@ -1,23 +1,24 @@
 #!/usr/bin/env groovy
 
+
 // Ne garder que 5 builds et 5 artefacts
-properties([buildDiscarder(logRotator(artifactNumToKeepStr: '5', numToKeepStr: '5'))])
+properties([buildDiscarder(logRotator( artifactNumToKeepStr: '5', numToKeepStr: '5'))])
 
 
 node {
 
-    def imageName = "BeerAPI"
+	// On définit le nom de l'image docker qui sera buildée.
+	def imageName = "BeerApi"
 
-    stage('checkout') {
-        checkout scm
-        //git url: 'https://github.com/spring-projects/spring-petclinic.git'
-    }
+	stage('checkout'){
+		checkout scm
+	}
 
-    // si jenkins est dans un docker, il faut rajouter -u root
+	// si jenkins est dans un docker, il faut rajouter -u root
     docker.image('openjdk:8').inside('-e MAVEN_OPTS="-Duser.home=./"') {
-        stage('check tools') {
-            parallel(
-                java: {
+		stage('check tools') {
+             parallel(
+                 java: {
                     sh "java -version"
                 },
                 maven: {
@@ -28,14 +29,14 @@ node {
         }
 
 
-        stage('clean') {
-            sh "./mvnw clean"
-        }
+		stage('clean') {
+			sh "./mvnw clean"
+		}
 
-        stage('backend tests') {
+		stage('backend tests') {
             try {
                 sh "./mvnw test"
-            } catch (err) {
+            } catch(err) {
                 throw err
             } finally {
                 junit '**/target/surefire-reports/TEST-*.xml'
@@ -52,43 +53,38 @@ node {
             sh "./mvnw verify -Pprod -DskipTests"
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
         }
-
-        stage('build docker') {
-                // l'image sera buildée dans target/docker
-
-                // récupération des fichiers nécessaire pour faire l'image
-                sh "git clone https://github.com/pdelaby/docker-for-spring-boot.git target/docker"
-
-                // copie du jar de l'application
-                sh "cp target/*.jar target/docker/"
-
-                // build
-                docker.build("fac/${imageName}:latest", 'target/docker')
-            }
-
-
-
-        stage('cleanup') {
-            cleanWs()
-        }
     }
 
-    stage('stop et rm docker') {
-        // Word Count : on compte les lignes présentes du docker PS
-        def imageWC = sh(script: "docker ps -a -q --filter \"name=${imageName}\" | wc -l", returnStdout: true).trim()
+    stage('build docker') {
+		// l'image sera buildée dans target/docker
 
-        // Si on trouve une image, on l'éteint et on la vire
-        if (imageWC == "1") {
-            sh "docker stop ${imageName}"
-            sh "docker rm ${imageName}"
-        } else {
-            println 'Image non demarree'
-        }
+		// récupération des fichiers nécessaire pour faire l'image
+        sh "git clone https://github.com/Yutsa/BeerAPI.git target/docker"
 
+		// copie du jar de l'application
+        sh "cp target/*.jar target/docker/"
+
+		// build
+        docker.build("fac/${imageName}:latest", 'target/docker')
     }
-    stage('start docker') {
-        // démarrage de l'image et configuration pour qu'elle se connecte à spring boot admin
-        // qui est dans le réseau springadmin
-        sh "docker run -d --name ${imageName} --net=springadmin -e -p 9999:8080 fac/${imageName}:latest"
-    }
+
+
+	stage('stop et rm docker'){
+		// Word Count : on compte les lignes présentes du docker PS
+		def imageWC = sh(script: "docker ps -a -q --filter \"name=${imageName}\" | wc -l", returnStdout: true).trim()
+
+		// Si on trouve une image, on l'éteint et on la vire
+		if ( imageWC == "1" ){
+			sh "docker stop ${imageName}"
+			sh "docker rm ${imageName}"
+		}else{
+			println 'Image non demarree'
+		}
+
+	}
+	stage('start docker'){
+		// démarrage de l'image et configuration pour qu'elle se connecte à spring boot admin
+		// qui est dans le réseau springadmin
+		sh "docker run -d --name ${imageName} --net=springadmin -e -p 9999:8080 fac/${imageName}:latest"
+	}
 }

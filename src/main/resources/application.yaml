@@ -1,4 +1,10 @@
 spring:
+  application:
+    name: BeerAPI
+  boot:
+    admin:
+      client:
+        url: http://vps575474.ovh.net:8099
  datasource:
    url: jdbc:mysql://metzopole.xyz/beerapi
    username: BeerAPI
