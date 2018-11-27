@@ -1,16 +1,16 @@
 spring:
   application:
-    name: BeerAPI
+    name: beerapi
   boot:
     admin:
-      client:
+      server:
         url: http://vps575474.ovh.net:8099
- datasource:
-   url: jdbc:mysql://metzopole.xyz/beerapi
-   username: BeerAPI
-   password: monkey
-   driver-class-name: com.mysql.jdbc.Driver
- jpa:
-   properties:
-     hibernate:
-       dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    url: jdbc:mysql://metzopole.xyz/beerapi
+    username: BeerAPI
+    password: monkey
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
