@@ -23,3 +23,4 @@ Git flow, une branche par feature.
 * TDD 
 * Intégrer Sonar à la pipeline Jenkins
 * Ajouter des commit/push hook pour lancer les builds automatiquement après un push
+* Utiliser Spring Boot Admin
