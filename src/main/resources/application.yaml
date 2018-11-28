@@ -3,7 +3,7 @@ spring:
     name: beerapi
   boot:
     admin:
-      server:
+      client:
         url: http://vps575474.ovh.net:8099
   datasource:
     url: jdbc:mysql://metzopole.xyz/beerapi
@@ -14,3 +14,12 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
