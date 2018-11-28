@@ -1,6 +1,6 @@
 package com.beerapi.beerapi.model.resources;
 
-import com.beerapi.beerapi.controller.BeerController;
+import com.beerapi.beerapi.controller.BeerAPI;
 import com.beerapi.beerapi.model.entities.Beer;
 
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
@@ -11,7 +11,7 @@ public class BeerResourceAssembler extends ResourceAssemblerSupport<Beer, BeerRe
 {
   public BeerResourceAssembler()
   {
-    super(BeerController.class, BeerResource.class);
+    super(BeerAPI.class, BeerResource.class);
   }
 
   @Override
