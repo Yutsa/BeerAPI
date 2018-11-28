@@ -1,6 +1,7 @@
 package com.beerapi.beerapi.services;
 
 import com.beerapi.beerapi.exception.BeerNotFoundException;
+import com.beerapi.beerapi.logging.ValueSanitizer;
 import com.beerapi.beerapi.model.entities.Beer;
 import com.beerapi.beerapi.model.resources.BeerResource;
 import com.beerapi.beerapi.repository.BeerRepository;
@@ -73,7 +74,7 @@ public class BeerService
   }
 
   public Iterable<Beer> searchBeer(String query) {
-    logger.info("Searching beers with query : {}.", query);
+    logger.info("Searching beers with query : {}.", ValueSanitizer.sanitizeInput(query));
     query = prepareSearchQuery(query);
     return beerRepository.findBeerByName(query);
   }

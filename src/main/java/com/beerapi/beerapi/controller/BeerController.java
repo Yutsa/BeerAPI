@@ -1,5 +1,6 @@
 package com.beerapi.beerapi.controller;
 
+import com.beerapi.beerapi.logging.ValueSanitizer;
 import com.beerapi.beerapi.model.entities.Beer;
 import com.beerapi.beerapi.model.resources.BeerResource;
 import com.beerapi.beerapi.model.resources.BeerResourceAssembler;
@@ -43,19 +44,19 @@ public class BeerController implements BeerAPI
 
   @Override
   public BeerResource getById(@PathVariable Long id) {
-    logger.info("Getting beer from id {}.", id);
+    logger.info("Getting beer from id {}.", ValueSanitizer.sanitizeInput(id));
     return assembler.toResource(beerService.getById(id));
   }
 
   @Override
   public void deleteById(@PathVariable Long id) {
-    logger.info("Deleting beer with id {}.", id);
+    logger.info("Deleting beer with id {}.", ValueSanitizer.sanitizeInput(id));
     beerService.deleteById(id);
   }
 
   @Override
   public BeerResource addBeer(@RequestBody BeerResource newBeer) {
-    logger.info("Adding beer {}.", newBeer);
+    logger.info("Adding beer {}.", ValueSanitizer.sanitizeInput(newBeer));
     return assembler.toResource(beerService.addBeer(newBeer));
   }
 
