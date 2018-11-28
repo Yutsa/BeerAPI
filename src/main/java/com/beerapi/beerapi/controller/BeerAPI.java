@@ -15,20 +15,23 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/beers")
 public interface BeerAPI
 {
-  @ApiOperation(value = "Retrieve all the beers", nickname = "Retrieve all the beers", tags={ "Beers" })
+  @ApiOperation(value = "Retrieve all the beers", nickname = "Retrieve all the beers",
+      tags={ "Beers" })
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success") })
   @GetMapping("/")
   Resources<BeerResource> getAllBeers();
 
-  @ApiOperation(value = "Retrieve a beer by its ID", nickname = "Retrieve a beer by ID", tags={ "Beers" })
+  @ApiOperation(value = "Retrieve a beer by its ID", nickname = "Retrieve a beer by ID",
+      tags={ "Beers" })
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success"),
       @ApiResponse(code = 404, message = "Beer with id {id} not found") })
   @GetMapping("/{id}")
   BeerResource getById(Long id);
 
-  @ApiOperation(value = "Deletes a beer by its ID", nickname = "Delete a beer by ID", tags={ "Beers" })
+  @ApiOperation(value = "Deletes a beer by its ID", nickname = "Delete a beer by ID",
+      tags={ "Beers" })
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success"),
       @ApiResponse(code = 404, message = "Beer with id {id} not found") })
@@ -42,7 +45,8 @@ public interface BeerAPI
   @PostMapping("/")
   BeerResource addBeer(BeerResource newBeer);
 
-  @ApiOperation(value = "Retrieve the beers that are like the one passed as parameter", nickname = "Similar Beers", tags={ "Beers"})
+  @ApiOperation(value = "Retrieve the beers that are like the one passed as parameter",
+      nickname = "Similar Beers", tags={ "Beers"})
   @ApiResponses(value = {
       @ApiResponse(code = 200, message = "Success")})
   @GetMapping("/similar/{id}")
