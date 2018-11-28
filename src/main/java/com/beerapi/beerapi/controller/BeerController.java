@@ -23,10 +23,10 @@ public class BeerController implements BeerAPI
 {
   private BeerResourceAssembler assembler;
   private BeerService beerService;
-  private static final Logger logger = LoggerFactory.getLogger(BeerController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(BeerController.class);
 
-  public BeerController(BeerResourceAssembler assembler,
-                        BeerService beerService)
+  public BeerController(final BeerResourceAssembler assembler,
+                        final BeerService beerService)
   {
     this.assembler = assembler;
     this.beerService = beerService;
@@ -35,7 +35,7 @@ public class BeerController implements BeerAPI
   @Override
   public Resources<BeerResource> getAllBeers()
   {
-    logger.info("Getting all the beers.");
+    LOGGER.info("Getting all the beers.");
     List<BeerResource> beers = assembler.toResources(beerService.getAllBeers());
 
     Link link = linkTo(BeerController.class).withSelfRel();
@@ -43,25 +43,34 @@ public class BeerController implements BeerAPI
   }
 
   @Override
-  public BeerResource getById(@PathVariable Long id) {
-    logger.info("Getting beer from id {}.", ValueSanitizer.sanitizeInput(id));
+  public BeerResource getById(@PathVariable final Long id) {
+    if (LOGGER.isInfoEnabled())
+    {
+      LOGGER.info("Getting beer from id {}.", ValueSanitizer.sanitizeInput(id));
+    }
     return assembler.toResource(beerService.getById(id));
   }
 
   @Override
-  public void deleteById(@PathVariable Long id) {
-    logger.info("Deleting beer with id {}.", ValueSanitizer.sanitizeInput(id));
+  public void deleteById(@PathVariable final Long id) {
+    if (LOGGER.isInfoEnabled())
+    {
+      LOGGER.info("Deleting beer with id {}.", ValueSanitizer.sanitizeInput(id));
+    }
     beerService.deleteById(id);
   }
 
   @Override
-  public BeerResource addBeer(@RequestBody BeerResource newBeer) {
-    logger.info("Adding beer {}.", ValueSanitizer.sanitizeInput(newBeer));
+  public BeerResource addBeer(@RequestBody final BeerResource newBeer) {
+    if (LOGGER.isInfoEnabled())
+    {
+      LOGGER.info("Adding beer {}.", ValueSanitizer.sanitizeInput(newBeer));
+    }
     return assembler.toResource(beerService.addBeer(newBeer));
   }
 
   @Override
-  public Resources<BeerResource> getSimilarBeers(@PathVariable Long id)
+  public Resources<BeerResource> getSimilarBeers(@PathVariable final Long id)
   {
     Iterable<Beer> similarBeers = beerService.getSimilarBeer(id);
     List<BeerResource> beers = assembler.toResources(similarBeers);
@@ -71,7 +80,7 @@ public class BeerController implements BeerAPI
   }
 
   @Override
-  public Iterable<BeerResource> searchBeer(@PathVariable String query)
+  public Iterable<BeerResource> searchBeer(@PathVariable final String query)
   {
     return assembler.toResources(beerService.searchBeer(query));
   }

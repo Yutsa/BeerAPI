@@ -20,20 +20,20 @@ public class BeerService
 {
 
   private BeerRepository beerRepository;
-  private static final Logger logger = LoggerFactory.getLogger(BeerService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(BeerService.class);
 
-  public BeerService(BeerRepository beerRepository)
+  public BeerService(final BeerRepository beerRepository)
   {
     this.beerRepository = beerRepository;
   }
 
-  public Iterable<Beer> getSimilarBeer(Long id) {
+  public Iterable<Beer> getSimilarBeer(final Long id) {
     Optional<Beer> initialBeer = beerRepository.findById(id);
 
     if (!initialBeer.isPresent())
     {
       String message = MessageFormat.format("Beer with id {0} not found", id);
-      logger.warn(message);
+      LOGGER.warn(message);
       throw new BeerNotFoundException(message);
     }
 
@@ -45,22 +45,22 @@ public class BeerService
 
   }
 
-  public Beer addBeer(BeerResource newBeer) {
+  public Beer addBeer(final BeerResource newBeer) {
     Beer beer = new Beer(newBeer);
     return beerRepository.save(beer);
   }
 
-  public void deleteById(Long id) {
+  public void deleteById(final Long id) {
     beerRepository.deleteById(id);
   }
 
-  public Beer getById(Long id) {
+  public Beer getById(final Long id) {
     Optional<Beer> beer = beerRepository.findById(id);
 
     if (!beer.isPresent())
     {
       String message = MessageFormat.format("Beer with id {0} not found", id);
-      logger.warn(message);
+      LOGGER.warn(message);
       throw new BeerNotFoundException(message);
     }
 
@@ -69,17 +69,19 @@ public class BeerService
 
   public Iterable<Beer> getAllBeers()
   {
-    logger.info("Getting all the beers.");
+    LOGGER.info("Getting all the beers.");
     return beerRepository.findAll();
   }
 
-  public Iterable<Beer> searchBeer(String query) {
-    logger.info("Searching beers with query : {}.", ValueSanitizer.sanitizeInput(query));
-    query = prepareSearchQuery(query);
-    return beerRepository.findBeerByName(query);
+  public Iterable<Beer> searchBeer(final String query) {
+    if (LOGGER.isInfoEnabled())
+    {
+      LOGGER.info("Searching beers with query : {}.", ValueSanitizer.sanitizeInput(query));
+    }
+    return beerRepository.findBeerByName(prepareSearchQuery(query));
   }
 
-  public String prepareSearchQuery(String query) {
+  public String prepareSearchQuery(final String query) {
     return query.replace("œ", "oe");
   }
 }

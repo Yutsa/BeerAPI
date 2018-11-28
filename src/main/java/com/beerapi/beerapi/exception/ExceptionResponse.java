@@ -1,21 +1,21 @@
 package com.beerapi.beerapi.exception;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class ExceptionResponse
 {
-  private Date timestamp;
+  private LocalDateTime timestamp;
   private String message;
   private String details;
 
-  public ExceptionResponse(Date timestamp, String message, String details) {
+  public ExceptionResponse(final LocalDateTime timestamp, final String message, final String details) {
     super();
     this.timestamp = timestamp;
     this.message = message;
     this.details = details;
   }
 
-  public Date getTimestamp() {
+  public LocalDateTime getTimestamp() {
     return timestamp;
   }
 
