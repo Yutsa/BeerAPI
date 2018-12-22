@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>com.beerapi</groupId>
-	<artifactId>BeerAPI</artifactId>
+	<artifactId>beerapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
