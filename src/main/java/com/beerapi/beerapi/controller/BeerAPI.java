@@ -52,8 +52,8 @@ public interface BeerAPI
   @GetMapping("/similar/{id}")
   Iterable<BeerResource> getSimilarBeers(Long id);
 
-  @ApiOperation(value = "Search for a beer with a part of the name, the alcohol percentage or " +
-      "the brewery", nickname = "Search Beer", tags={"Beers"})
+  @ApiOperation(value = "Search for a beer with its name or the alcohol percentage",
+      nickname = "Search Beer", tags={"Beers"})
   @GetMapping("/search/{query}")
   Iterable<BeerResource> searchBeer(String query);
 }
