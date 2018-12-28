@@ -1,7 +1,6 @@
 package com.beerapi.beerapi.controller;
 
 import com.beerapi.beerapi.logging.ValueSanitizer;
-import com.beerapi.beerapi.model.entities.Beer;
 import com.beerapi.beerapi.model.resources.BeerResource;
 import com.beerapi.beerapi.model.resources.BeerResourceAssembler;
 import com.beerapi.beerapi.services.BeerService;
@@ -72,8 +71,7 @@ public class BeerController implements BeerAPI
   @Override
   public Resources<BeerResource> getSimilarBeers(@PathVariable final Long id)
   {
-    Iterable<Beer> similarBeers = beerService.getSimilarBeer(id);
-    List<BeerResource> beers = assembler.toResources(similarBeers);
+    List<BeerResource> beers = assembler.toResources(beerService.getSimilarBeer(id));
 
     Link link = linkTo(BeerController.class).withSelfRel();
     return new Resources<>(beers, link);
@@ -82,6 +80,9 @@ public class BeerController implements BeerAPI
   @Override
   public Iterable<BeerResource> searchBeer(@PathVariable final String query)
   {
-    return assembler.toResources(beerService.searchBeer(query));
+    List<BeerResource> beers = assembler.toResources(beerService.searchBeer(query));
+
+    Link link = linkTo(BeerController.class).withSelfRel();
+    return new Resources<>(beers, link);
   }
 }

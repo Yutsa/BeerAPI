@@ -2,6 +2,7 @@ package com.beerapi.beerapi.model.entities;
 
 import com.beerapi.beerapi.model.resources.BeerResource;
 
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -26,8 +27,12 @@ public class Beer
   private double ibu;
   private double srm;
   private double upc;
-  private String filepath;
-  private String descript;
+  private String filepath = "";
+  private String descript = "";
+  @Column(name = "last_mod")
+  private Date lastMod = new Date();
+
+
 
   public Beer(double alcoholPercentage, String name)
   {
