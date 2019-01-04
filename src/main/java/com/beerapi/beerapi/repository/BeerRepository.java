@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface BeerRepository extends JpaRepository<Beer, Long>
 {
   Iterable<Beer> findBeerByAlcoholPercentage(double alcoholPercentage);
-  Iterable<Beer> findBeerByName(String name);
+  Iterable<Beer> findBeerByNameIgnoreCaseContaining(String name);
 }

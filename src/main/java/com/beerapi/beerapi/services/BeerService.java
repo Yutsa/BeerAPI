@@ -78,7 +78,7 @@ public class BeerService
     {
       LOGGER.info("Searching beers with query : {}.", ValueSanitizer.sanitizeInput(query));
     }
-    return beerRepository.findBeerByName(prepareSearchQuery(query));
+    return beerRepository.findBeerByNameIgnoreCaseContaining(prepareSearchQuery(query));
   }
 
   public String prepareSearchQuery(final String query) {
