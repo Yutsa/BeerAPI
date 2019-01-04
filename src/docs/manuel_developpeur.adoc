@@ -1,0 +1,53 @@
+= Manuel du développeur
+
+== Pré-requis
+
+* Java
+* Maven
+* Git
+
+== Récupération des sources
+
+Vous pouvez cloner le projet avec la commande `git clone https://gitlab.com/Yutsa/beerapi`
+
+== Environnement de développement
+
+Votre environnement de développement consiste simplement en un IDE (IntelliJ ou Eclipse), de Maven et de git.
+
+Le code est hébergé sur github et le projet utilise le système de git flow.
+
+Ainsi la branche `master` ne peut être modifiée directement, elle représente des versions stables du programme.
+
+La branche `develop` contient les développements en cours. La manière de contribuer
+au code est de créer une nouvelle branche à partir de `develop` lorsque vous voulez
+ajouter du code.
+
+Par exemple pour corrgier le bug #123 il faut :
+
+* Checkout la branch develop `git checkout develop`
+
+* Vérifier qu'elle est à jour en local `git pull`
+
+* Créer une nouvelle branche `git checkout -b bug_123`
+
+* Coder puis commit le code sur votre branche. `git add --all && git commit -m "Mon message"`
+
+* Envoyer le code sur le serveur github `git push`
+
+* Enfin, sur l'interface web de github ouvrir une `pull request`.
+
+À ce moment votre code sera étudié par les autres développeurs et sera accepté ou rejeté. Des retours et des conseils vous serons fait s'il y a des modifications à faire.
+
+== Intégration continue
+
+Un serveur Jenkins s'occupe de l'intégration continue. Toutes les 15 minutes, s'il y
+a des nouveaux commit sur le repository git, un build sera lancé.
+
+La pipeline d'intégration continue est configurée dans le fichier `Jenkinsfile`
+
+Cette pipeline appelle également un serveur SonarQube pour effectuer une analyse du code.
+
+=== Adresse de la plateforme d'intégration continue
+
+* Jenkins : http://vps575474.ovh.net:8080/
+* SonarQube : http://vps575474.ovh.net:9000/
