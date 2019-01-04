@@ -35,7 +35,8 @@
             **/controller/**/*,
             **/exception/**/*,
             **/model/**/*,
-            **/repository/**/*
+            **/repository/**/*,
+            **/BeerApiApplication.java
         </sonar.coverage.exclusions>
     </properties>
 
@@ -153,6 +154,7 @@
                         <exclude>**/exception/**/*</exclude>
                         <exclude>**/model/**/*</exclude>
                         <exclude>**/repository/**/*</exclude>
+                        <exclude>**/BeerApiApplication.java</exclude>
                     </excludes>
                 </configuration>
                 <executions>
