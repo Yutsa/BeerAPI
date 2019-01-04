@@ -30,7 +30,7 @@ Par exemple pour corrgier le bug #123 il faut :
 
 * Créer une nouvelle branche `git checkout -b bug_123`
 
-* Coder puis commit le code sur votre branche. `git add --all && git commit -m "Mon message"`
+* Coder puis commit le code sur votre branche. `git add --all` puis `git commit -m "Mon message"`
 
 * Envoyer le code sur le serveur github `git push`
 
