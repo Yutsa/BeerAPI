@@ -28,10 +28,4 @@ merged to the `develop` branch.
 When a version is considered ready, it is merged to the `master` branch and a tag is then
 created.
 
-
-## Process
-
-* TDD 
-* Intégrer Sonar à la pipeline Jenkins
-* Ajouter des commit/push hook pour lancer les builds automatiquement après un push
-* Utiliser Spring Boot Admin
+A developper manual is available in the `src/doc` directory.
