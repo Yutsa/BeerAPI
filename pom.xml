@@ -139,6 +139,9 @@
                 <version>0.7.2.201409121644</version>
                 <configuration>
                     <append>true</append>
+                    <includes>
+                        <include>**/com/beerapi/beerapi/services/**/*</include>
+                    </includes>
                 </configuration>
                 <executions>
                     <execution>
