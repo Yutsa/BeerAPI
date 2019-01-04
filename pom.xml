@@ -149,11 +149,11 @@
                 <configuration>
                     <append>true</append>
                     <excludes>
-                        <include>**/configuration/**/</include>
-                        <include>**/controller/**/</include>
-                        <include>**/exception/**/</include>
-                        <include>**/logging/**/</include>
-                        <include>**/model/**/</include>
+                        <include>**/configuration/**/*</include>
+                        <include>**/controller/**/*</include>
+                        <include>**/exception/**/*</include>
+                        <include>**/logging/**/*</include>
+                        <include>**/model/**/*</include>
                         <include>**/repository/**/*</include>
                     </excludes>
                 </configuration>
