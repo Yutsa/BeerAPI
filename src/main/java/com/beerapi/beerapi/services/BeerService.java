@@ -62,7 +62,7 @@ public class BeerService
     return beerRepository.findBeerByNameIgnoreCaseContaining(prepareSearchQuery(query));
   }
 
-  private String prepareSearchQuery(final String query) {
+  private static String prepareSearchQuery(final String query) {
     return Optional.ofNullable(query)
         .map(it -> it.replace("œ", "oe"))
         .orElse("");

@@ -2,7 +2,7 @@ package com.beerapi.beerapi.model.entities;
 
 import com.beerapi.beerapi.model.resources.BeerResource;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -30,7 +30,7 @@ public class Beer
   private String filepath = "";
   private String descript = "";
   @Column(name = "last_mod")
-  private Date lastMod = new Date();
+  private LocalDateTime lastMod = LocalDateTime.now();
 
 
 
