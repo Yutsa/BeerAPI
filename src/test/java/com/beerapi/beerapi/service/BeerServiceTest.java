@@ -1,4 +1,4 @@
-package com.beerapi.beerapi;
+package com.beerapi.beerapi.service;
 
 import com.beerapi.beerapi.exception.BeerNotFoundException;
 import com.beerapi.beerapi.model.entities.Beer;

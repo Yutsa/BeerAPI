@@ -1,9 +1,11 @@
 package com.beerapi.beerapi.logging;
 
+import java.util.regex.Pattern;
+
 public final class ValueSanitizer
 {
 
-  private static final String NEWLINE_PATTERN = "[\r\n]";
+  private static final Pattern NEWLINE_PATTERN = Pattern.compile("[\r\n]");
 
   private ValueSanitizer(){}
   public static String sanitizeInput(Object object) {
@@ -11,6 +13,6 @@ public final class ValueSanitizer
     {
       return "";
     }
-    return object.toString().replaceAll(NEWLINE_PATTERN,"");
+    return NEWLINE_PATTERN.matcher(object.toString()).replaceAll("");
   }
 }

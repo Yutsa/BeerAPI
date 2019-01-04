@@ -34,7 +34,6 @@
             **/configuration/**/*,
             **/controller/**/*,
             **/exception/**/*,
-            **/logging/**/*,
             **/model/**/*,
             **/repository/**/*
         </sonar.coverage.exclusions>
@@ -149,12 +148,11 @@
                 <configuration>
                     <append>true</append>
                     <excludes>
-                        <include>**/configuration/**/*</include>
-                        <include>**/controller/**/*</include>
-                        <include>**/exception/**/*</include>
-                        <include>**/logging/**/*</include>
-                        <include>**/model/**/*</include>
-                        <include>**/repository/**/*</include>
+                        <exclude>**/configuration/**/*</exclude>
+                        <exclude>**/controller/**/*</exclude>
+                        <exclude>**/exception/**/*</exclude>
+                        <exclude>**/model/**/*</exclude>
+                        <exclude>**/repository/**/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

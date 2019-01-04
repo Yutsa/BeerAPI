@@ -44,7 +44,7 @@ public class BeerResource extends ResourceSupport
   }
 
   @ApiModelProperty(hidden = true)
-  public void setLinks(final Link... links)
+  public void setLinks(final Link[] links)
   {
     super.add(links);
   }
@@ -61,8 +61,12 @@ public class BeerResource extends ResourceSupport
   @Override
   public boolean equals(Object o)
   {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     BeerResource beerResource = (BeerResource) o;
     return Double.compare(beerResource.alcoholPercentage, alcoholPercentage) == 0 &&
         Objects.equals(name, beerResource.name);
