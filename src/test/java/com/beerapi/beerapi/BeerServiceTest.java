@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 public class BeerServiceTest
 {
   @Test
-  public void searchBeer_With_oe() {
+  public void testSearchBeer_With_oe() {
     BeerRepository mockBeerRepository = mock(BeerRepository.class);
     BeerService beerService = new BeerService(mockBeerRepository);
 
@@ -25,7 +25,7 @@ public class BeerServiceTest
   }
 
   @Test
-  public void searchBeer_NullQuery() {
+  public void testSearchBeer_NullQuery() {
     BeerRepository mockBeerRepository = mock(BeerRepository.class);
     BeerService beerService = new BeerService(mockBeerRepository);
 
@@ -34,7 +34,7 @@ public class BeerServiceTest
   }
   
   @Test
-  public void similarBeer_UseCorrectPercentage() {
+  public void testSimilarBeer_UseCorrectPercentage() {
     BeerRepository mockBeerRepository = mock(BeerRepository.class);
     when(mockBeerRepository.findById(3L))
         .thenReturn(Optional.of(new Beer(12, "TestBeer")));
@@ -46,7 +46,7 @@ public class BeerServiceTest
   }
 
   @Test(expected = BeerNotFoundException.class)
-  public void similarBeer_BeerNotFound() {
+  public void TestSimilarBeer_BeerNotFound() {
     BeerRepository mockBeerRepository = mock(BeerRepository.class);
     when(mockBeerRepository.findById(3L)).thenReturn(Optional.empty());
     BeerService beerService = new BeerService(mockBeerRepository);
