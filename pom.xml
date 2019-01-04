@@ -30,7 +30,14 @@
         <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
         <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.language>java</sonar.language>
-        <sonar.coverage.inclusions>**/services/**/*</sonar.coverage.inclusions>
+        <sonar.coverage.exclusions>
+            **/configuration/**/*,
+            **/controller/**/*,
+            **/exception/**/*,
+            **/logging/**/*,
+            **/model/**/*,
+            **/repository/**/*
+        </sonar.coverage.exclusions>
     </properties>
 
     <dependencies>
@@ -141,7 +148,14 @@
                 <version>0.7.2.201409121644</version>
                 <configuration>
                     <append>true</append>
-
+                    <excludes>
+                        <include>**/configuration/**/</include>
+                        <include>**/controller/**/</include>
+                        <include>**/exception/**/</include>
+                        <include>**/logging/**/</include>
+                        <include>**/model/**/</include>
+                        <include>**/repository/**/*</include>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
