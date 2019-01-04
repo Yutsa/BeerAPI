@@ -27,24 +27,6 @@ public class BeerService
     this.beerRepository = beerRepository;
   }
 
-  public Iterable<Beer> getSimilarBeer(final Long id) {
-    Optional<Beer> initialBeer = beerRepository.findById(id);
-
-    if (!initialBeer.isPresent())
-    {
-      String message = MessageFormat.format("Beer with id {0} not found", id);
-      LOGGER.warn(message);
-      throw new BeerNotFoundException(message);
-    }
-
-    double alcoholPercentage = initialBeer.get().getAlcoholPercentage();
-    Iterable<Beer> beerIterable = beerRepository.findBeerByAlcoholPercentage(alcoholPercentage);
-    return StreamSupport.stream(beerIterable.spliterator(), false)
-        .filter(b -> !b.getId().equals(id))
-        .collect(Collectors.toList());
-
-  }
-
   public Beer addBeer(final BeerResource newBeer) {
     Beer beer = new Beer(newBeer);
     return beerRepository.save(beer);
@@ -67,8 +49,7 @@ public class BeerService
     return beer.get();
   }
 
-  public Iterable<Beer> getAllBeers()
-  {
+  public Iterable<Beer> getAllBeers() {
     LOGGER.info("Getting all the beers.");
     return beerRepository.findAll();
   }
@@ -78,11 +59,32 @@ public class BeerService
     {
       LOGGER.info("Searching beers with query : {}.", ValueSanitizer.sanitizeInput(query));
     }
-    return beerRepository.findBeerByName(prepareSearchQuery(query));
+    return beerRepository.findBeerByNameIgnoreCaseContaining(prepareSearchQuery(query));
   }
 
-  public String prepareSearchQuery(final String query) {
-    return query.replace("œ", "oe");
+  private String prepareSearchQuery(final String query) {
+    return Optional.ofNullable(query)
+        .map(it -> it.replace("œ", "oe"))
+        .orElse("");
+  }
+
+  public Iterable<Beer> getSimilarBeer(final Long id) {
+    Optional<Beer> initialBeer = beerRepository.findById(id);
+
+    if (!initialBeer.isPresent())
+    {
+      String message = MessageFormat.format("Beer with id {0} not found", id);
+      LOGGER.warn(message);
+      throw new BeerNotFoundException(message);
+    }
+
+    double alcoholPercentage = initialBeer.get().getAlcoholPercentage();
+    Iterable<Beer> beerIterable = beerRepository.findBeerByAlcoholPercentage(alcoholPercentage);
+
+    return StreamSupport.stream(beerIterable.spliterator(), false)
+        .filter(b -> !b.getId().equals(id))
+        .collect(Collectors.toList());
+
   }
 }
 
