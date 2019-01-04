@@ -52,7 +52,7 @@ public interface BeerAPI
   @GetMapping("/similar/{id}")
   Iterable<BeerResource> getSimilarBeers(Long id);
 
-  @ApiOperation(value = "Search for a beer with its name or the alcohol percentage",
+  @ApiOperation(value = "Search for a beer with its name or a part of its name.",
       nickname = "Search Beer", tags={"Beers"})
   @GetMapping("/search/{query}")
   Iterable<BeerResource> searchBeer(String query);
