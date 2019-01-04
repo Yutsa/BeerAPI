@@ -46,7 +46,7 @@ public class BeerServiceTest
   }
 
   @Test(expected = BeerNotFoundException.class)
-  public void TestSimilarBeerBeerNotFound() {
+  public void testSimilarBeerBeerNotFound() {
     BeerRepository mockBeerRepository = mock(BeerRepository.class);
     when(mockBeerRepository.findById(3L)).thenReturn(Optional.empty());
     BeerService beerService = new BeerService(mockBeerRepository);

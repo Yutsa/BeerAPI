@@ -140,7 +140,7 @@
                 <configuration>
                     <append>true</append>
                     <includes>
-                        <include>**/com/beerapi/beerapi/services/**/*</include>
+                        <include>**/services/**/*</include>
                     </includes>
                 </configuration>
                 <executions>
