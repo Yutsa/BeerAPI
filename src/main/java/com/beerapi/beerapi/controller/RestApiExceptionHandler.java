@@ -19,7 +19,7 @@ public class RestApiExceptionHandler extends ResponseEntityExceptionHandler
 {
 
   @ExceptionHandler(Exception.class)
-  public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex,
+  public final ResponseEntity<ExceptionResponse> handleAllExceptions(Throwable ex,
                                                                      WebRequest request)
   {
     ExceptionResponse exceptionResponse = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(),
@@ -28,7 +28,7 @@ public class RestApiExceptionHandler extends ResponseEntityExceptionHandler
   }
 
   @ExceptionHandler(BeerNotFoundException.class)
-  public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(BeerNotFoundException ex,
+  public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(Throwable ex,
                                                                              WebRequest request)
   {
     ExceptionResponse exceptionResponse = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(),
