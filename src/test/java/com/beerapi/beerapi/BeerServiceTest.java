@@ -1,21 +1,30 @@
 package com.beerapi.beerapi;
 
+import com.beerapi.beerapi.repository.BeerRepository;
 import com.beerapi.beerapi.services.BeerService;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class BeerServiceTest
 {
-  private BeerService beerService;
+  @Test
+  public void searchBeer_With_oe() {
+    BeerRepository mockBeerRepository = mock(BeerRepository.class);
+    BeerService beerService = new BeerService(mockBeerRepository);
 
-  public BeerServiceTest()
-  {
-    beerService = new BeerService(null);
+    beerService.searchBeer("œuf");
+    verify(mockBeerRepository).findBeerByNameIgnoreCaseContaining("oeuf");
   }
 
   @Test
-  public void prepareSearchQuery_ShouldReplaceOe() {
-    Assert.assertEquals("oeuf", beerService.prepareSearchQuery("œuf"));
+  public void searchBeer_NullQuery() {
+    BeerRepository mockBeerRepository = mock(BeerRepository.class);
+    BeerService beerService = new BeerService(mockBeerRepository);
+
+    beerService.searchBeer(null);
+    verify(mockBeerRepository).findBeerByNameIgnoreCaseContaining("");
   }
 }

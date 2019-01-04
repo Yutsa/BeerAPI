@@ -39,6 +39,7 @@ public class BeerService
 
     double alcoholPercentage = initialBeer.get().getAlcoholPercentage();
     Iterable<Beer> beerIterable = beerRepository.findBeerByAlcoholPercentage(alcoholPercentage);
+
     return StreamSupport.stream(beerIterable.spliterator(), false)
         .filter(b -> !b.getId().equals(id))
         .collect(Collectors.toList());
@@ -81,8 +82,10 @@ public class BeerService
     return beerRepository.findBeerByNameIgnoreCaseContaining(prepareSearchQuery(query));
   }
 
-  public String prepareSearchQuery(final String query) {
-    return query.replace("œ", "oe");
+  private String prepareSearchQuery(final String query) {
+    return Optional.ofNullable(query)
+        .map(it -> it.replace("œ", "oe"))
+        .orElse("");
   }
 }
 
