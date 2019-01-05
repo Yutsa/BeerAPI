@@ -36,7 +36,7 @@ Par exemple pour corrgier le bug #123 il faut :
 
 * Enfin, sur l'interface web de github ouvrir une `pull request`.
 
-À ce moment votre code sera étudié par les autres développeurs et sera accepté ou rejeté. Des retours et des conseils vous serons fait s'il y a des modifications à faire.
+À ce moment votre code sera étudié par les autres développeurs et sera accepté ou rejeté. Des retours et des conseils vous seront fait s'il y a des modifications à faire.
 
 == Intégration continue
 
