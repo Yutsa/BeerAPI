@@ -24,6 +24,10 @@ ajouter du code.
 
 Par exemple pour corrgier le bug #123 il faut :
 
+* Faire un fork du projet
+
+* Cloner le nouveau repository `git clone https://github.com/<YourName>/BeerAPI.git`
+
 * Checkout la branch develop `git checkout develop`
 
 * Vérifier qu'elle est à jour en local `git pull`
@@ -32,11 +36,11 @@ Par exemple pour corrgier le bug #123 il faut :
 
 * Coder puis commit le code sur votre branche. `git add --all` puis `git commit -m "Mon message"`
 
-* Envoyer le code sur le serveur github `git push`
+* Envoyer le code sur le serveur github `git push` ou `git push --set-upstream origin bug_123` si la branche n'a jamais existé
 
-* Enfin, sur l'interface web de github ouvrir une `pull request`.
+* Enfin, sur l'interface web de github ouvrir une `pull request`
 
-À ce moment votre code sera étudié par les autres développeurs et sera accepté ou rejeté. Des retours et des conseils vous serons fait s'il y a des modifications à faire.
+À ce moment votre code sera étudié par les autres développeurs et sera accepté ou rejeté. Des retours et des conseils vous seront fait s'il y a des modifications à faire.
 
 == Intégration continue
 
