@@ -5,6 +5,7 @@ import com.beerapi.beerapi.model.entities.Beer;
 import com.beerapi.beerapi.repository.BeerRepository;
 import com.beerapi.beerapi.services.BeerService;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -52,5 +53,16 @@ public class BeerServiceTest
     BeerService beerService = new BeerService(mockBeerRepository);
 
     beerService.getSimilarBeer(3L);
+  }
+  
+  
+  @Test
+  public void testSearchBeerWithNull() {
+    BeerRepository mockBeerRepository = mock(BeerRepository.class);
+    BeerService beerService = new BeerService(mockBeerRepository);
+
+    Iterable<Beer> result = beerService.searchBeer(null);
+    
+    Assert.assertEquals(0, result.spliterator().getExactSizeIfKnown());
   }
 }
