@@ -24,7 +24,7 @@ ajouter du code.
 
 Par exemple pour corrgier le bug #123 il faut :
 
-* Faire un fork du projet
+* Faire un fork du projet : sur l'interface Github cliquez sur le bouton de fork
 
 * Cloner le nouveau repository `git clone https://github.com/<YourName>/BeerAPI.git`
 
@@ -41,6 +41,16 @@ Par exemple pour corrgier le bug #123 il faut :
 * Enfin, sur l'interface web de github ouvrir une `pull request`
 
 À ce moment votre code sera étudié par les autres développeurs et sera accepté ou rejeté. Des retours et des conseils vous seront fait s'il y a des modifications à faire.
+
+== Maintenir votre fork à jour
+
+Une fois vos modifications effectuées, pour maintenir votre fork à jour avec l'original, il faut procéder aux étapes suivantes
+
+* Ajouter le remote du projet original `git remote add upstream https://github.com/Yutsa/BeerAPI.git`
+
+* Récuperer les branches du repo : `git fetch upstream`
+
+* Récupérer les données de la branches voulue : `git pull upstream master`
 
 == Intégration continue
 
