@@ -15,7 +15,7 @@ node {
 	}
 
 	// si jenkins est dans un docker, il faut rajouter -u root
-    docker.image('openjdk:8').inside('-e MAVEN_OPTS="-Duser.home=./"') {
+    //docker.image('openjdk:8').inside('-e MAVEN_OPTS="-Duser.home=./"') {
 		stage('check tools') {
              parallel(
                  java: {
@@ -53,23 +53,23 @@ node {
             sh "./mvnw verify -Pprod -DskipTests"
             archiveArtifacts artifacts: '**/target/*.jar,**/target/docs/*.html', fingerprint: true
         }
-    }
+   // }
 
-    stage('build docker') {
+    //stage('build docker') {
 		// l'image sera buildée dans target/docker
 
 		// récupération des fichiers nécessaire pour faire l'image
-        sh "git clone https://github.com/pdelaby/docker-for-spring-boot.git target/docker"
+      //  sh "git clone https://github.com/pdelaby/docker-for-spring-boot.git target/docker"
 
 		// copie du jar de l'application
-        sh "cp target/*.jar target/docker/"
+        //sh "cp target/*.jar target/docker/"
 
 		// build
-        docker.build("fac/${imageName}:latest", 'target/docker')
-    }
+        //docker.build("fac/${imageName}:latest", 'target/docker')
+    //}
 
 
-	stage('stop et rm docker'){
+	/*stage('stop et rm docker'){
 		// Word Count : on compte les lignes présentes du docker PS
 		def imageWC = sh(script: "docker ps -a -q --filter \"name=${imageName}\" | wc -l", returnStdout: true).trim()
 
@@ -86,5 +86,5 @@ node {
 		// démarrage de l'image et configuration pour qu'elle se connecte à spring boot admin
 		// qui est dans le réseau springadmin
 		sh "docker run -d --name ${imageName} --net=springadmin -p 9999:8080 fac/${imageName}:latest"
-	}
+	}*/
 }
